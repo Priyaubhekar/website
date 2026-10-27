@@ -3,17 +3,32 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
-import gdown
+import requests
 
-# ===== 1. MODEL PART - PURANA WALA, ISKO MAT CHEDNA =====
 FILE_ID = "1BaAl_GtA2hMqtzcJg5LQ4f45T8Ny1"
 MODEL_PATH = "skin_disease_model.keras"
+
+def download_model():
+    URL = "https://drive.google.com/uc?export=download"
+    session = requests.Session()
+    response = session.get(URL, params={'id': FILE_ID}, stream=True)
+    token = None
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            token = value
+    if token:
+        params = {'id': FILE_ID, 'confirm': token}
+        response = session.get(URL, params=params, stream=True)
+    with open(MODEL_PATH, "wb") as f:
+        for chunk in response.iter_content(32768):
+            if chunk:
+                f.write(chunk)
 
 if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
     if os.path.exists(MODEL_PATH):
         os.remove(MODEL_PATH)
     st.write("Downloading model... please wait 1-2 min...")
-    gdown.download(FILE_ID, output=MODEL_PATH, quiet=False)
+    download_model()
     st.write("Download done!")
 
 @st.cache_resource
@@ -22,10 +37,8 @@ def load_model():
 
 model = load_model()
 
-# Tumhare purane wale class names - same order rakhna
 CLASS_NAMES = ['Acne', 'Eczema', 'Psoriasis', 'Ringworm', 'Normal Skin', 'Melanoma', 'Vitiligo']
 
-# ===== 2. NEW INTERFACE - SIRF YAHAN CHANGE KIYA HAI =====
 st.set_page_config(page_title="SkinCheck AI", page_icon="🩺", layout="centered")
 
 st.markdown("""
@@ -54,11 +67,9 @@ if uploaded_file is not None:
     st.markdown("### 🤖 Step 2: Check Result")
     if st.button("🔍 PREDICT NOW"):
         with st.spinner("AI image ko check kar raha hai..."):
-            # SAME PREPROCESSING - ISKO MAT BADALNA
             img = image.resize((224, 224))
             img_array = np.array(img) / 255.0
             img_array = np.expand_dims(img_array, axis=0)
-
             prediction = model.predict(img_array)
             predicted_class = CLASS_NAMES[np.argmax(prediction)]
             confidence = np.max(prediction) * 100
