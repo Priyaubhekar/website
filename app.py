@@ -16,7 +16,7 @@ if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
         os.remove(MODEL_PATH)
     st.write("Downloading model from Drive... please wait, 1-2 min...")
     url = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
-    gdown.download(url=url, output=MODEL_PATH, quiet=False, fuzzy=True)
+    gdown.download(id=FILE_ID, output=MODEL_PATH, quiet=False)
     st.write("Download done!")
 
 @st.cache_resource
