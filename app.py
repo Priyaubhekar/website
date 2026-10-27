@@ -2,36 +2,27 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-import glob
 import os
-import requests
+import gdown
 
 st.title("Skin Disease Detection")
 st.write("Upload an image to predict")
 
-# --- Download model from Google Drive ---
 FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
-MODEL_URL = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
 MODEL_PATH = "skin_disease_model.keras"
 
-if not os.path.exists(MODEL_PATH):
-    st.write("Downloading model from Drive... please wait, 1 min...")
-    r = requests.get(MODEL_URL, allow_redirects=True)
-    open(MODEL_PATH, 'wb').write(r.content)
+if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
+    if os.path.exists(MODEL_PATH):
+        os.remove(MODEL_PATH)
+    st.write("Downloading model from Drive... please wait, 1-2 min...")
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
+    gdown.download(url, MODEL_PATH, quiet=False)
     st.write("Download done!")
-
-# Find model file automatically - no need to type name
-model_files = glob.glob("*.h5") + glob.glob("*.keras")
-if len(model_files) == 0:
-    st.error("Model file not found! Please upload your .h5 or .keras file")
-    st.stop()
-
-MODEL_NAME = model_files[0]
-st.write(f"Using model: {MODEL_NAME}")
+    st.write(f"File size: {os.path.getsize(MODEL_PATH)} bytes")
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model(MODEL_NAME)
+    return tf.keras.models.load_model(MODEL_PATH)
 
 model = load_model()
 st.success("Model loaded!")
