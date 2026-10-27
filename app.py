@@ -3,32 +3,18 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
-import requests
+import gdown
 
-FILE_ID = "1BaAl_GtA2hMqtzcJg5LQ4f45T8Ny1"
+FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
 MODEL_PATH = "skin_disease_model.keras"
 
-def download_model():
-    URL = "https://drive.google.com/uc?export=download"
-    session = requests.Session()
-    response = session.get(URL, params={'id': FILE_ID}, stream=True)
-    token = None
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            token = value
-    if token:
-        params = {'id': FILE_ID, 'confirm': token}
-        response = session.get(URL, params=params, stream=True)
-    with open(MODEL_PATH, "wb") as f:
-        for chunk in response.iter_content(32768):
-            if chunk:
-                f.write(chunk)
-
+# Model download - sirf ek baar hoga
 if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
     if os.path.exists(MODEL_PATH):
         os.remove(MODEL_PATH)
     st.write("Downloading model... please wait 1-2 min...")
-    download_model()
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
+    gdown.download(url, MODEL_PATH, quiet=False, fuzzy=True)
     st.write("Download done!")
 
 @st.cache_resource
