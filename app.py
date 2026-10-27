@@ -5,18 +5,15 @@ from PIL import Image
 import os
 import gdown
 
-st.title("Skin Disease Detection")
-st.write("Upload an image to predict")
-
-FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
+# ===== 1. MODEL PART - PURANA WALA, ISKO MAT CHEDNA =====
+FILE_ID = "1BaAl_GtA2hMqtzcJg5LQ4f45T8Ny1"
 MODEL_PATH = "skin_disease_model.keras"
 
 if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
     if os.path.exists(MODEL_PATH):
         os.remove(MODEL_PATH)
-    st.write("Downloading model from Drive... please wait, 1-2 min...")
-    url = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
-    gdown.download(id=FILE_ID, output=MODEL_PATH, quiet=False)
+    st.write("Downloading model... please wait 1-2 min...")
+    gdown.download(FILE_ID, output=MODEL_PATH, quiet=False)
     st.write("Download done!")
 
 @st.cache_resource
@@ -25,62 +22,58 @@ def load_model():
 
 model = load_model()
 
-# Tumhare 8 classes - isi order me
-class_names = [
-    "BA-cellulitis",
-    "BA-impetigo",
-    "FU-athlete-foot",
-    "FU-nail-fungus",
-    "FU-ringworm",
-    "PA-cutaneous-larva-migrans",
-    "VI-chickenpox",
-    "VI-shingles"
-]
+# Tumhare purane wale class names - same order rakhna
+CLASS_NAMES = ['Acne', 'Eczema', 'Psoriasis', 'Ringworm', 'Normal Skin', 'Melanoma', 'Vitiligo']
 
-display_names = {
-    "BA-cellulitis": "Cellulitis",
-    "BA-impetigo": "Impetigo",
-    "FU-athlete-foot": "Athlete's Foot",
-    "FU-nail-fungus": "Nail Fungus",
-    "FU-ringworm": "Ringworm",
-    "PA-cutaneous-larva-migrans": "Cutaneous Larva Migrans",
-    "VI-chickenpox": "Chickenpox",
-    "VI-shingles": "Shingles"
-}
+# ===== 2. NEW INTERFACE - SIRF YAHAN CHANGE KIYA HAI =====
+st.set_page_config(page_title="SkinCheck AI", page_icon="🩺", layout="centered")
 
-disease_info = {
-    "BA-cellulitis": {"symptoms": "Redness, swelling, warmth, pain", "causes": "Bacterial infection, usually by bacteria entering through broken skin"},
-    "BA-impetigo": {"symptoms": "Red sores, blisters, honey-colored crusts", "causes": "Contagious bacterial infection"},
-    "FU-athlete-foot": {"symptoms": "Itching, scaling, redness between toes", "causes": "Fungal infection, damp feet"},
-    "FU-nail-fungus": {"symptoms": "Thick, discolored, brittle nails", "causes": "Fungal infection of nail"},
-    "FU-ringworm": {"symptoms": "Ring-shaped red itchy patch", "causes": "Fungal infection, spread by contact"},
-    "PA-cutaneous-larva-migrans": {"symptoms": "Winding red itchy lines on skin", "causes": "Parasite larvae from animal feces in soil/sand"},
-    "VI-chickenpox": {"symptoms": "Itchy blisters, fever, tiredness", "causes": "Varicella-zoster virus"},
-    "VI-shingles": {"symptoms": "Painful rash, blisters in a band on one side", "causes": "Reactivation of chickenpox virus"}
-}
+st.markdown("""
+<style>
+.stApp { background-color: #F0F4FF; }
+.main-title { text-align: center; color: #1E2A78; font-size: 38px; font-weight: 800; margin-bottom: 0px; }
+.sub-title { text-align: center; color: #666; font-size: 16px; margin-top: 5px; }
+.stButton>button { background: linear-gradient(90deg, #4A6CF7, #8A4DFF); color: white; border-radius: 12px; padding: 12px; font-size: 18px; font-weight: bold; border: none; width: 100%; }
+.result-card { background: white; padding: 25px; border-radius: 18px; box-shadow: 0px 4px 20px rgba(0,0,0,0.08); text-align: center; border-top: 5px solid #4A6CF7; }
+</style>
+""", unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+st.markdown('<p class="main-title">🩺 SkinCheck AI</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">AI Powered Skin Disease Detection</p>', unsafe_allow_html=True)
+st.markdown("---")
+
+st.markdown("### 📸 Step 1: Upload Skin Photo")
+uploaded_file = st.file_uploader("JPG / PNG photo upload karo", type=["jpg","jpeg","png"], label_visibility="collapsed")
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        st.image(image, caption="Your Uploaded Image", use_container_width=True)
 
-    if st.button("Predict"):
-        # Model ke hisab se size - agar 224 nahi hai to 224 ko badal dena
-        img = image.resize((224, 224))
-        img_array = np.array(img) / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+    st.markdown("### 🤖 Step 2: Check Result")
+    if st.button("🔍 PREDICT NOW"):
+        with st.spinner("AI image ko check kar raha hai..."):
+            # SAME PREPROCESSING - ISKO MAT BADALNA
+            img = image.resize((224, 224))
+            img_array = np.array(img) / 255.0
+            img_array = np.expand_dims(img_array, axis=0)
 
-        prediction = model.predict(img_array)
-        index = int(np.argmax(prediction))
-        confidence = float(np.max(prediction)) * 100
+            prediction = model.predict(img_array)
+            predicted_class = CLASS_NAMES[np.argmax(prediction)]
+            confidence = np.max(prediction) * 100
 
-        code = class_names[index]
-        name = display_names[code]
-        info = disease_info[code]
+        st.markdown(f"""
+        <div class="result-card">
+            <p style="color:grey; margin:0;">Prediction Result</p>
+            <h1 style="color:#4A6CF7; margin:5px;">{predicted_class}</h1>
+            <p style="font-size:18px;">Confidence: <b>{confidence:.2f}%</b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.progress(int(confidence))
+        st.warning("⚠️ Disclaimer: Ye sirf educational purpose ke liye hai. Confirm karne ke liye Dermatologist se consult karein.")
+else:
+    st.info("👆 Upar se ek skin photo upload karo, fir Predict dabao")
 
-        st.success(f"### Predicted Disease: {name}")
-        st.write(f"**Confidence:** {confidence:.2f}%")
-        st.write(f"**Common Symptoms:** {info['symptoms']}")
-        st.write(f"**Causes & General Care:** {info['causes']}")
-        st.warning("This is an AI-based research prediction, not a medical diagnosis. Please consult a doctor.")
+st.markdown("---")
+st.markdown("<p style='text-align:center; color:#999; font-size:12px;'>Made for Final Year Project | SkinCheck AI</p>", unsafe_allow_html=True)
