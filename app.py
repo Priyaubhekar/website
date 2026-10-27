@@ -8,7 +8,7 @@ import gdown
 st.title("Skin Disease Detection")
 st.write("Upload an image to predict")
 
-FILE_ID = "19aAa1_GctA2hGqtzjcjQ5LQXf4STNXy1"
+FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
 MODEL_PATH = "skin_disease_model.keras"
 
 if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
