@@ -25,14 +25,19 @@ INFO = {
 }
 
 # --- Model Load ---
+FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
+MODEL_PATH = "skin_disease_model.keras"
+MODEL_URL = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
+
 @st.cache_resource
 def load_model():
-    # Pehle naya high accuracy model try karo, nahi to purana
-    if os.path.exists("skin_model_high_accuracy.h5"):
-        return tf.keras.models.load_model("skin_model_high_accuracy.h5")
-    elif os.path.exists("skin_model.h5"):
+    if not os.path.exists("skin_model.h5"):
+        with st.spinner("Model download ho raha hai... 1 min ruko..."):
+            r = requests.get(MODEL_URL)
+            open("skin_model.h5","wb").write(r.content)
+    try:
         return tf.keras.models.load_model("skin_model.h5")
-    else:
+    except:
         return None
 
 model = load_model()
