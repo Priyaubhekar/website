@@ -24,7 +24,15 @@ def load_model():
 model = load_model()
 
 CLASS_NAMES = ['Acne', 'Eczema', 'Psoriasis', 'Ringworm', 'Normal Skin', 'Melanoma', 'Vitiligo']
-
+DIET_DATA = {
+    "Acne": {"eat": "Paani 3-4 Litre, Coconut Water, Palak, Cucumber, Dal, Oats, Orange, Amla, Dahi", "avoid": "Sugar, Mithai, Cold Drink, Fried, Maida, Fast Food, Chocolate, Chips, Dudh jyada", "remedy": "Chehra din me 2 baar halke paani se dhoyo, Haath se dane mat phodo, Takiya ka cover roz badlo.", "meal": "Subah: Nimbu Paani + Oats | Lunch: Dal + Roti + Salad | Raat: Khichdi + Dahi"},
+    "Eczema": {"eat": "Paani jyada, Dahi, Coconut Oil, Palak, Orange, Badam, Oats, Fish", "avoid": "Teekha, Masaledar, Khatta, Pickle, Maida, Bakery, Cold Drink, Dust wali cheez", "remedy": "Nariyal tel lagao, Garam paani se mat nahaao, Cotton kapde pehno, Khujli mat karo.", "meal": "Subah: Doodh + Badam | Lunch: Dal + Roti + Palak | Raat: Daliya + Dahi"},
+    "Psoriasis": {"eat": "Paani jyada, Palak, Methi, Haldi, Lahsun, Fish, Dahi, Fruits", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried, Red Meat, Spicy, Bakery", "remedy": "Nariyal tel + Haldi lagao, Dhoop me 10 min baitho, Skin ko sukha mat hone do.", "meal": "Subah: Haldi Doodh + Fruits | Lunch: Dal + Roti + Sabzi | Raat: Khichdi"},
+    "Ringworm": {"eat": "Dahi, Haldi, Neem, Lahsun, Green Sabzi, Fruits, Paani 3 Litre", "avoid": "Sugar, Gud, Meetha, Maida, White Bread, Fried, Alcohol", "remedy": "Neem ka Tel + Haldi lagao, Kapde dhoop me sukhhao, Kisi ka towel mat use karo.", "meal": "Subah: Nimbu Paani + Oats | Lunch: Roti + Dal + Sabzi | Raat: Khichdi + Dahi"},
+    "Normal Skin": {"eat": "Paani 3 Litre, Fruits, Salad, Dahi, Dal, Badam, Palak, Coconut Water", "avoid": "Jyada Sugar, Jyada Fried, Cold Drink, Junk Food, Smoking", "remedy": "Skin achhi hai! Roz paani piyo, Sunscreen lagao, Neend puri lo.", "meal": "Subah: Fruits + Oats | Lunch: Dal + Roti + Salad | Raat: Halka Khana"},
+    "Melanoma": {"eat": "Paani jyada, Palak, Orange, Amla, Haldi, Dahi, Dal, Fruits", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried, Processed Food, Dhoop me jyada rehna", "remedy": "Isme ghar ka upay mat karo! Turant bade Doctor / Hospital jao. Dhoop me mat jao, Daag ko mat chhedo.", "meal": "Subah: Fruits + Doodh | Lunch: Dal + Roti + Salad | Raat: Khichdi - Doctor se diet puchho"},
+    "Vitiligo": {"eat": "Palak, Methi, Chukandar, Amla, Orange, Badam, Akhrot, Dahi, Dal, Paani jyada", "avoid": "Khatta - Nimbu, Pickle, Dahi + Machhi ek saath nahi, Maida, Bakery, Alcohol, Smoking", "remedy": "Dhoop me subah 10 min baitho, Stress mat lo, Adrak ka ras safed daag pe lagao (Doctor se puch ke).", "meal": "Subah: Badam + Doodh | Lunch: Dal + Roti + Palak | Raat: Khichdi + Salad"}
+}
 st.set_page_config(page_title="SkinCheck AI", page_icon="🩺", layout="centered")
 
 st.markdown("""
@@ -68,6 +76,17 @@ if uploaded_file is not None:
         </div>
         """, unsafe_allow_html=True)
         st.progress(int(confidence))
+        if predicted_class in DIET_DATA:
+                diet = DIET_DATA[predicted_class]
+                st.markdown("---")
+                st.markdown(f"### 🥗 {predicted_class} ke liye Diet Plan")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.success(f"**✅ KHAO:** {diet['eat']}")
+                with col2:
+                    st.error(f"**❌ MAT KHAO:** {diet['avoid']}")
+                st.info(f"**🏠 Ghar ka Upay:** {diet['remedy']}")
+                st.warning(f"**📅 1 Din ka Meal:** {diet['meal']}")
         st.warning("⚠️ Disclaimer: Ye sirf educational purpose ke liye hai. Confirm karne ke liye Dermatologist se consult karein.")
 else:
     st.info("👆 Upar se ek skin photo upload karo, fir Predict dabao")
