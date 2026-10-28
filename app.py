@@ -25,7 +25,6 @@ model = load_model()
 
 CLASS_NAMES = ['Acne', 'Eczema', 'Psoriasis', 'Ringworm', 'Normal Skin', 'Melanoma', 'Vitiligo']
 DIET_DATA = {
-    DIET_DATA = {
     "Acne": {"eat": "Water 3-4 Litres, Coconut Water, Spinach, Cucumber, Lentils (Dal), Oats, Orange, Amla, Curd", "avoid": "Sugar, Sweets, Cold Drink, Fried Food, Maida, Fast Food, Chocolate, Chips, Excess Milk", "remedy": "Wash face 2 times a day with plain water, Do not pop pimples, Change pillow cover daily.", "meal": "Morning: Lemon Water + Oats | Lunch: Dal + Roti + Salad | Night: Khichdi + Curd"},
     "Eczema": {"eat": "More Water, Curd, Coconut Oil, Spinach, Orange, Almonds, Oats, Fish", "avoid": "Spicy, Masala, Sour Food, Pickle, Maida, Bakery, Cold Drink, Dust", "remedy": "Apply Coconut Oil, Do not bathe with hot water, Wear cotton clothes, Do not scratch.", "meal": "Morning: Milk + Almonds | Lunch: Dal + Roti + Spinach | Night: Daliya + Curd"},
     "Psoriasis": {"eat": "More Water, Spinach, Fenugreek (Methi), Turmeric, Garlic, Fish, Curd, Fruits", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried Food, Red Meat, Spicy Food, Bakery", "remedy": "Apply Coconut Oil + Turmeric, Sit in sunlight for 10 mins, Do not let skin become dry.", "meal": "Morning: Turmeric Milk + Fruits | Lunch: Dal + Roti + Vegetables | Night: Khichdi"},
@@ -33,7 +32,6 @@ DIET_DATA = {
     "Normal Skin": {"eat": "Water 3 Litres, Fruits, Salad, Curd, Dal, Almonds, Spinach, Coconut Water", "avoid": "Too Much Sugar, Too Much Fried Food, Cold Drink, Junk Food, Smoking", "remedy": "Your skin is healthy! Drink water daily, Apply sunscreen, Take full sleep.", "meal": "Morning: Fruits + Oats | Lunch: Dal + Roti + Salad | Night: Light Dinner"},
     "Melanoma": {"eat": "More Water, Spinach, Orange, Amla, Turmeric, Curd, Dal, Fruits", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried Food, Processed Food, Too much Sun exposure", "remedy": "Do not try home remedy! Go to a big Doctor / Hospital immediately. Do not go in sun, Do not touch the spot.", "meal": "Morning: Fruits + Milk | Lunch: Dal + Roti + Salad | Night: Khichdi - Ask Doctor for diet"},
     "Vitiligo": {"eat": "Spinach, Fenugreek, Beetroot, Amla, Orange, Almonds, Walnuts, Curd, Dal, More Water", "avoid": "Sour Food - Lemon, Pickle, Curd + Fish together, Maida, Bakery, Alcohol, Smoking", "remedy": "Sit in morning sunlight for 10 mins, Do not take stress, Apply ginger juice on white patches (after asking Doctor).", "meal": "Morning: Almonds + Milk | Lunch: Dal + Roti + Spinach | Night: Khichdi + Salad"}
-}
 }
 st.set_page_config(page_title="SkinCheck AI", page_icon="🩺", layout="centered")
 
