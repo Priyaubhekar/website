@@ -106,7 +106,7 @@ if image is not None:
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown(f"""<div style="background-color:#fff3cd; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>⚠️ Disclaimer:</b> This is for educational purpose only. Please consult a Doctor.</div>""", unsafe_allow_html=True)
 else:
-    st.info("👆 Upar se ek skin photo upload karo, fir Predict dabao")
+    st.info("👆 Please upload a skin photo from above, then press Predict")
 
 st.markdown("---")
 st.markdown("<p style='text-align:center; color:#999; font-size:12px;'>Made for Final Year Project | SkinCheck AI</p>", unsafe_allow_html=True)
