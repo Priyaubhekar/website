@@ -130,7 +130,7 @@ if st.button("✨ PREDICT NOW"):
             """, unsafe_allow_html=True)
             st.progress(int(confidence))
 
-                        if predicted_class in DIET_DATA:
+                if predicted_class in DIET_DATA:
                 diet = DIET_DATA[predicted_class]
                 st.markdown("---")
                 st.markdown(f"""<h3 style="color:black;">🥗 Diet Plan for {predicted_class}</h3>""", unsafe_allow_html=True)
