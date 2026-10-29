@@ -129,22 +129,13 @@ if st.button("✨ PREDICT NOW"):
             </div>
             """, unsafe_allow_html=True)
             st.progress(int(confidence))
-
             if predicted_class in DIET_DATA:
                 diet = DIET_DATA[predicted_class]
                 st.markdown("---")
                 st.markdown(f"""<h3 style="color:black;">🥗 Diet Plan for {predicted_class}</h3>""", unsafe_allow_html=True)
-
-                # Diet ko Eat aur Avoid me alag karo
-            if isinstance(diet, dict):
-                    st.markdown(f"""<div style="background-color:#D4EDDA; padding:15px; border-radius:12px; color:black; margin-bottom:10px;"><b>✅ Eat This:</b><br>{diet.get('eat','')}</div>""", unsafe_allow_html=True)
-                    st.markdown(f"""<div style="background-color:#F8D7DA; padding:15px; border-radius:12px; color:black;"><b>🚫 Avoid This:</b><br>{diet.get('avoid','')}</div>""", unsafe_allow_html=True)
-                else:
-            if "Avoid" in diet:
-                        eat_part = diet.split("Avoid")[0].replace("Eat:","").replace("Eat","").strip()
-                        avoid_part = diet.split("Avoid",1)[1].replace(":","",1).strip()
-                        st.markdown(f"""<div style="background-color:#D4EDDA; padding:15px; border-radius:12px; color:black; margin-bottom:10px;"><b>✅ Eat This:</b><br>{eat_part}</div>""", unsafe_allow_html=True)
-                        st.markdown(f"""<div style="background-color:#F8D7DA; padding:15px; border-radius:12px; color:black;"><b>🚫 Avoid This:</b><br>{avoid_part}</div>""", unsafe_allow_html=True)
-                 else:
-                        st.markdown(f"""<div style="background-color:#D4EDDA; padding:15px; border-radius:12px; color:black;">{diet}</div>""", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown(f"""<div style="background-color:#D4EDDA; padding:15px; border-radius:12px; color:black; margin-bottom:10px;"><b>✅ Eat This:</b><br>{diet['eat']}</div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="background-color:#F8D7DA; padding:15px; border-radius:12px; color:black; margin-bottom:10px;"><b>🚫 Avoid This:</b><br>{diet['avoid']}</div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="background-color:#FFF3CD; padding:15px; border-radius:12px; color:black; margin-bottom:10px;"><b>🌿 Home Remedy:</b><br>{diet['remedy']}</div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="background-color:#CCE5FF; padding:15px; border-radius:12px; color:black;"><b>🍽️ Meal Plan:</b><br>{diet['meal']}</div>""", unsafe_allow_html=True)
+else:
+    st.info("👆 Please upload a skin photo from above, then press Predict")
