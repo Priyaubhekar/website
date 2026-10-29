@@ -112,7 +112,7 @@ if image is not None:
         st.image(image, caption="Your Uploaded Image", use_container_width=True)
 
     st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
-    if st.button("🔍 PREDICT NOW"):
+        if st.button("✨ PREDICT NOW"):
         with st.spinner("AI image ko check kar raha hai..."):
             img = image.resize((224, 224))
             img_array = np.array(img) / 255.0
@@ -121,30 +121,22 @@ if image is not None:
             predicted_class = CLASS_NAMES[np.argmax(prediction)]
             confidence = np.max(prediction) * 100
 
-        st.markdown(f"""
-        <div class="result-card">
+            st.markdown(f"""
+            <div class="result-card">
             <p style="color:grey; margin:0;">Prediction Result</p>
             <h1 style="color:#4A6CF7; margin:5px;">{predicted_class}</h1>
             <p style="font-size:18px;">Confidence: <b>{confidence:.2f}%</b></p>
-        </div>
-        """, unsafe_allow_html=True)
-        st.progress(int(confidence))
-    if predicted_class in DIET_DATA:
-            diet = DIET_DATA[predicted_class]
-            st.markdown("---")
-            st.markdown(f"""<h3 style="color:black;">🥗 Diet Plan for {predicted_class}</h3>""", unsafe_allow_html=True)
+            </div>
+            """, unsafe_allow_html=True)
+            st.progress(int(confidence))
 
-            st.markdown(f"""<div style="background-color:#d4edda; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>✅ EAT:</b> {diet['eat']}</div>""", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"""<div style="background-color:#f8d7da; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>❌ AVOID:</b> {diet['avoid']}</div>""", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"""<div style="background-color:#cce5ff; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>🏠 Home Remedy:</b> {diet['remedy']}</div>""", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"""<div style="background-color:#fff3cd; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>📅 1 Day Meal Plan:</b> {diet['meal']}</div>""", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"""<div style="background-color:#fff3cd; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>⚠️ Disclaimer:</b> This is for educational purpose only. Please consult a Doctor.</div>""", unsafe_allow_html=True)
-else:
-    st.info("👆 Please upload a skin photo from above, then press Predict")
+            if predicted_class in DIET_DATA:
+                diet = DIET_DATA[predicted_class]
+                st.markdown("---")
+                st.markdown(f"""<h3 style="color:black;">🥗 Diet Plan for {predicted_class}</h3>""", unsafe_allow_html=True)
+
+                st.markdown(f"""<div style="background-color:#d4edda; padding:15px; border-radius:10px; color:black;">{diet}</div>""", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown("<p style='text-align:center; color:#999; font-size:12px;'>Made for Final Year Project | SkinCheck AI</p>", unsafe_allow_html=True)
