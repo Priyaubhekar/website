@@ -80,7 +80,7 @@ if uploaded_file is not None:
     if predicted_class in DIET_DATA:
             diet = DIET_DATA[predicted_class]
             st.markdown("---")
-            st.markdown(f"### 🥗 Diet Plan for {predicted_class}")
+            st.markdown(f"""<h3 style="color:black;">🥗 Diet Plan for {predicted_class}</h3>""", unsafe_allow_html=True)
 
             st.markdown(f"""<div style="background-color:#d4edda; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>✅ EAT:</b> {diet['eat']}</div>""", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
