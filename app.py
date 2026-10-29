@@ -77,8 +77,7 @@ if uploaded_file is not None:
         </div>
         """, unsafe_allow_html=True)
         st.progress(int(confidence))
-        if predicted_class in DIET_DATA:
-                        if predicted_class in DIET_DATA:
+    if predicted_class in DIET_DATA:
             diet = DIET_DATA[predicted_class]
             st.markdown("---")
             st.markdown(f"### 🥗 Diet Plan for {predicted_class}")
