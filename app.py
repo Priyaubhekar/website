@@ -78,17 +78,20 @@ if uploaded_file is not None:
         """, unsafe_allow_html=True)
         st.progress(int(confidence))
         if predicted_class in DIET_DATA:
-                diet = DIET_DATA[predicted_class]
-                st.markdown("---")
-                st.markdown(f"### 🥗 {predicted_class} ke liye Diet Plan")
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.success(f"**✅ KHAO:** {diet['eat']}")
-                with col2:
-                    st.error(f"**❌ MAT KHAO:** {diet['avoid']}")
-                st.info(f"**🏠 Ghar ka Upay:** {diet['remedy']}")
-                st.warning(f"**📅 1 Din ka Meal:** {diet['meal']}")
-        st.warning("⚠️ Disclaimer: Ye sirf educational purpose ke liye hai. Confirm karne ke liye Dermatologist se consult karein.")
+                        if predicted_class in DIET_DATA:
+            diet = DIET_DATA[predicted_class]
+            st.markdown("---")
+            st.markdown(f"### 🥗 Diet Plan for {predicted_class}")
+
+            st.markdown(f"""<div style="background-color:#d4edda; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>✅ EAT:</b> {diet['eat']}</div>""", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background-color:#f8d7da; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>❌ AVOID:</b> {diet['avoid']}</div>""", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background-color:#cce5ff; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>🏠 Home Remedy:</b> {diet['remedy']}</div>""", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background-color:#fff3cd; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>📅 1 Day Meal Plan:</b> {diet['meal']}</div>""", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"""<div style="background-color:#fff3cd; padding:15px; border-radius:10px; color:black; font-size:16px;"><b>⚠️ Disclaimer:</b> This is for educational purpose only. Please consult a Doctor.</div>""", unsafe_allow_html=True)
 else:
     st.info("👆 Upar se ek skin photo upload karo, fir Predict dabao")
 
