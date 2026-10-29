@@ -50,16 +50,30 @@ st.markdown('<p class="main-title">🩺 SkinCheck AI</p>', unsafe_allow_html=Tru
 st.markdown('<p class="sub-title">AI Powered Skin Disease Detection</p>', unsafe_allow_html=True)
 st.markdown("---")
 
-st.markdown("### 📸 Step 1: Upload Skin Photo")
-uploaded_file = st.file_uploader("JPG / PNG photo upload karo", type=["jpg","jpeg","png"], label_visibility="collapsed")
+st.markdown("""<h3 style="color:black;">📸 Step 1: Take Photo</h3>""", unsafe_allow_html=True)
+st.markdown("""<p style="color:black;">Choose from gallery OR take a live photo</p>""", unsafe_allow_html=True)
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file).convert("RGB")
+option = st.radio("How do you want to take photo?", ["📁 Upload from Gallery", "📷 Take Live Photo"], horizontal=True)
+
+image = None
+uploaded_file = None
+camera_photo = None
+
+if option == "📁 Upload from Gallery":
+    uploaded_file = st.file_uploader("Upload your skin photo", type=["jpg", "jpeg", "png"])
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file).convert("RGB")
+else:
+    camera_photo = st.camera_input("📷 Take Live Photo - Keep your skin in front of camera")
+    if camera_photo is not None:
+        image = Image.open(camera_photo).convert("RGB")
+
+if image is not None:
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
         st.image(image, caption="Your Uploaded Image", use_container_width=True)
 
-    st.markdown("### 🤖 Step 2: Check Result")
+    st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
     if st.button("🔍 PREDICT NOW"):
         with st.spinner("AI image ko check kar raha hai..."):
             img = image.resize((224, 224))
