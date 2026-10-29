@@ -34,22 +34,60 @@ DIET_DATA = {
     "VI-chickenpox": {"eat": "More Water, Coconut Water, Oats, Daliya, Curd, Fruits, Soft Food", "avoid": "Spicy, Masala, Sour Food, Fried Food, Maida, Cold Drink", "remedy": "Take full rest, Do not scratch blisters, Bath with Neem water, Stay away from others.", "meal": "Morning: Coconut Water + Oats | Lunch: Khichdi + Curd | Night: Daliya"},
     "VI-shingles": {"eat": "Water, Spinach, Orange, Amla, Turmeric, Dal, Curd, Almonds", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried Food, Spicy Food", "remedy": "Take rest, Do not scratch, Keep blisters clean, Go to Doctor. Do not apply cream without Doctor.", "meal": "Morning: Fruits + Milk | Lunch: Dal + Roti + Salad | Night: Khichdi"}
 }
-st.set_page_config(page_title="SkinCheck AI", page_icon="🩺", layout="centered")
+st.set_page_config(page_title="SkinCheck AI", page_icon="🧴", layout="centered")
 
 st.markdown("""
 <style>
-.stApp { background-color: #F0F4FF; }
-.main-title { text-align: center; color: #1E2A78; font-size: 38px; font-weight: 800; margin-bottom: 0px; }
-.sub-title { text-align: center; color: #666; font-size: 16px; margin-top: 5px; }
-.stButton>button { background: linear-gradient(90deg, #4A6CF7, #8A4DFF); color: white; border-radius: 12px; padding: 12px; font-size: 18px; font-weight: bold; border: none; width: 100%; }
-.result-card { background: white; padding: 25px; border-radius: 18px; box-shadow: 0px 4px 20px rgba(0,0,0,0.08); text-align: center; border-top: 5px solid #4A6CF7; }
+    .stApp { background-color: #F0F4FF; }
+    .main-title { text-align: center; color: #1E2A78; font-size: 38px; font-weight: 800; margin-bottom: 0px; line-height: 1.1; }
+    .sub-title { text-align: center; color: #666; font-size: 16px; margin-top: 5px; }
+    .header-card {
+        background: linear-gradient(135deg, #4A6CF7, #8A4DFF);
+        padding: 28px 20px 22px 20px;
+        border-radius: 22px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(74,108,247,0.30);
+        margin-bottom: 18px;
+    }
+    .header-card h1 { color: white !important; font-size: 34px; margin: 0px; }
+    .header-card p { color: #E0E7FF !important; font-size: 15px; margin: 8px 0 0 0; }
+    .stButton>button {
+        background: linear-gradient(90deg, #4A6CF7, #8A4DFF);
+        color: white !important;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 25px;
+        font-size: 17px;
+        font-weight: bold;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(74,108,247,0.35);
+    }
+    .result-card {
+        background: white;
+        padding: 22px;
+        border-radius: 20px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        border: 1px solid #EDEFFF;
+    }
+    [data-testid="stFileUploader"], [data-testid="stCameraInput"] {
+        background: white;
+        padding: 12px;
+        border-radius: 16px;
+        border: 1px solid #EDEFFF;
+    }
+    .stRadio>div { background: white; padding: 10px 12px; border-radius: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="main-title">🩺 SkinCheck AI</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">AI Powered Skin Disease Detection</p>', unsafe_allow_html=True)
-st.markdown("---")
+st.markdown("""
+<div class="header-card">
+    <h1>🧴 SkinCheck AI</h1>
+    <p>Upload Photo • Instant AI Analysis • Diet + Medicine Info</p>
+</div>
+""", unsafe_allow_html=True)
 
+st.markdown("""<p style="text-align:center; color:#666; font-size:13px; margin-top:-8px;">🔒 100% Private • No photo is saved • Made for Final Year Project</p>""", unsafe_allow_html=True)
+st.markdown("---")
 st.markdown("""<h3 style="color:black;">📸 Step 1: Take Photo</h3>""", unsafe_allow_html=True)
 st.markdown("""<p style="color:black;">Choose from gallery OR take a live photo</p>""", unsafe_allow_html=True)
 
