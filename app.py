@@ -5,8 +5,8 @@ from PIL import Image
 import os
 import gdown
 
-FILE_ID = "19aAa1_GctA2hGqtzcjg05LQXF4STNXy1"
-MODEL_PATH = "skin_disease_model.keras"
+FILE_ID = "1Tor1YFYlqWwY5dhZ0BVdWcSpYrN5-cKF"
+MODEL_PATH = "new_model_9class.keras"
 
 # Model download - sirf ek baar hoga
 if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 1000000:
@@ -23,21 +23,22 @@ def load_model():
 
 model = load_model()
 
-CLASS_NAMES = ['BA- cellulitis', 'BA-impetigo', 'FU-athlete-foot', 'FU-nail-fungus', 'FU-ringworm', 'PA-cutaneous-larva-migrans', 'VI-chickenpox', 'VI-shingles']
+CLASS_NAMES = ['BA- cellulitis', 'BA-impetigo', 'FU-athlete-foot', 'FU-nail-fungus', 'FU-ringworm', 'Healthy', 'PA-cutaneous-larva-migrans', 'VI-chickenpox', 'VI-shingles']
+
 DIET_DATA = {
     "BA- cellulitis": {"eat": "Water 3 Litres, Spinach, Turmeric Milk, Orange, Amla, Dal, Curd", "avoid": "Sugar, Sweets, Fried Food, Maida, Alcohol, Junk Food", "remedy": "Keep leg raised, Do not press the swelling, Go to Doctor immediately. This is bacterial infection.", "meal": "Morning: Turmeric Milk + Fruits | Lunch: Dal + Roti + Salad | Night: Khichdi"},
     "BA-impetigo": {"eat": "Water, Turmeric, Neem, Curd, Spinach, Fruits, Dal", "avoid": "Sugar, Sweets, Spicy, Fried Food, Maida", "remedy": "Do not scratch, Do not share towel, Keep skin clean and dry, Apply Neem Oil.", "meal": "Morning: Lemon Water + Oats | Lunch: Dal + Roti + Vegetables | Night: Khichdi + Curd"},
     "FU-athlete-foot": {"eat": "Curd, Garlic, Turmeric, Green Vegetables, Water 3 Litres", "avoid": "Sugar, Jaggery, Maida, White Bread, Alcohol, Fried Food", "remedy": "Keep feet dry, Change socks daily, Dry shoes in sunlight, Do not wear wet shoes.", "meal": "Morning: Lemon Water + Fruits | Lunch: Roti + Dal + Salad | Night: Khichdi"},
     "FU-nail-fungus": {"eat": "Curd, Garlic, Turmeric, Neem, Green Vegetables, Fruits, Water", "avoid": "Sugar, Jaggery, Sweets, Maida, White Bread, Alcohol", "remedy": "Keep nails short and dry, Do not apply nail polish, Soak feet in warm water + salt.", "meal": "Morning: Lemon Water + Oats | Lunch: Dal + Roti + Vegetables | Night: Khichdi + Curd"},
     "FU-ringworm": {"eat": "Curd, Turmeric, Neem, Garlic, Green Vegetables, Fruits, Water 3 Litres", "avoid": "Sugar, Jaggery, Sweets, Maida, White Bread, Fried Food, Alcohol", "remedy": "Apply Neem Oil + Turmeric, Dry clothes in sunlight, Do not use others towel.", "meal": "Morning: Lemon Water + Oats | Lunch: Roti + Dal + Vegetables | Night: Khichdi + Curd"},
+    "Healthy": {"eat": "Balanced Diet, Green Vegetables, Fruits, Dal, Curd, Water 3 Litres, Dry Fruits", "avoid": "Junk Food, Too Much Sugar, Fried Food, Cold Drink, Alcohol", "remedy": "Skin is healthy! Keep it clean, Drink water, Use Sunscreen, Eat healthy food daily.", "meal": "Morning: Fruits + Milk / Oats | Lunch: Dal + Roti + Salad + Curd | Night: Light Khichdi / Vegetables"},
     "PA-cutaneous-larva-migrans": {"eat": "Water, Turmeric, Garlic, Spinach, Dal, Fruits, Curd", "avoid": "Sugar, Fried Food, Maida, Alcohol, Junk Food", "remedy": "Do not walk barefoot, Do not scratch, Go to Doctor immediately. This is parasite infection.", "meal": "Morning: Turmeric Milk + Fruits | Lunch: Dal + Roti + Salad | Night: Khichdi"},
     "VI-chickenpox": {"eat": "More Water, Coconut Water, Oats, Daliya, Curd, Fruits, Soft Food", "avoid": "Spicy, Masala, Sour Food, Fried Food, Maida, Cold Drink", "remedy": "Take full rest, Do not scratch blisters, Bath with Neem water, Stay away from others.", "meal": "Morning: Coconut Water + Oats | Lunch: Khichdi + Curd | Night: Daliya"},
     "VI-shingles": {"eat": "Water, Spinach, Orange, Amla, Turmeric, Dal, Curd, Almonds", "avoid": "Sugar, Maida, Alcohol, Smoking, Fried Food, Spicy Food", "remedy": "Take rest, Do not scratch, Keep blisters clean, Go to Doctor. Do not apply cream without Doctor.", "meal": "Morning: Fruits + Milk | Lunch: Dal + Roti + Salad | Night: Khichdi"}
 }
-st.set_page_config(page_title="SkinCheck AI", page_icon="🧴", layout="centered")
 
-st.markdown("""
-<style>
+st.set_page_config(page_title="SkinCheck AI", page_icon="🔍", layout="centered")
+st.markdown("""<style>
     .stApp { background-color: #F0F4FF; }
     .main-title { text-align: center; color: #1E2A78; font-size: 38px; font-weight: 800; margin-bottom: 0px; line-height: 1.1; }
     .sub-title { text-align: center; color: #666; font-size: 16px; margin-top: 5px; }
