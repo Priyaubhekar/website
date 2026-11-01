@@ -115,9 +115,9 @@ if image is not None:
         q4 = st.radio("4. Spreading?", ["Yes", "No"], horizontal=True)
         q5 = st.radio("5. Fever?", ["Yes", "No"], horizontal=True)
         q6 = st.radio("6. Cream used?", ["No", "Yes"], horizontal=True)
-     st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
-     st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
-     if st.button("✨ PREDICT NOW"):
+    st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
+    st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
+    if st.button("✨ PREDICT NOW"):
         with st.spinner("AI image ko check kar raha hai..."):
             img = image.resize((224, 224))
             img_array = np.array(img) / 255.0
