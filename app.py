@@ -118,17 +118,6 @@ else:
                 q4 = st.radio("4. Spreading?", ["Yes", "No"], horizontal=True)
                 q5 = st.radio("5. Fever?", ["Yes", "No"], horizontal=True)
                 q6 = st.radio("6. Cream used?", ["No", "Yes"], horizontal=True)
-        col1, col2 = st.columns(2)
-
-        with col1:
-            q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"], horizontal=True)
-            q2 = st.radio("2. Itching?", ["Yes", "Little", "No"], horizontal=True)
-            q4 = st.radio("4. Spreading?", ["Yes", "No"], horizontal=True)
-
-        with col2:
-            q3 = st.radio("3. Pain / Burning?", ["Yes", "No"], horizontal=True)
-            q5 = st.radio("5. Fever?", ["Yes", "No"], horizontal=True)
-            q6 = st.radio("6. Cream used?", ["No", "Yes"], horizontal=True)
 
     # Ye summary nahi dikhayenge, sirf result me use hoga
 
