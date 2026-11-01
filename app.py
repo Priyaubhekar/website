@@ -111,7 +111,20 @@ if image is not None:
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
         st.image(image, caption="Your Uploaded Image", use_container_width=True)
+    # ============ DOCTOR LIKE Q&A - YAHI PASTE KARO ============
+    st.markdown("""<h3 style="color:black;">🩺 Step 1.5: Doctor Like Questions</h3>""")
+    st.write("Please answer like you would answer a doctor:")
 
+    q1 = st.selectbox("1. Since when do you have this problem?", ["Since 2 days", "Since 1 week", "Since 1 month", "More than 1 month"])
+    q2 = st.selectbox("2. Do you have itching?", ["Yes, a lot", "A little bit", "No itching"])
+    q3 = st.selectbox("3. Do you have pain or burning?", ["Yes", "No", "Sometimes"])
+    q4 = st.selectbox("4. Is it spreading?", ["Yes, it is spreading", "No, same size"])
+    q5 = st.selectbox("5. Do you have fever?", ["Yes", "No"])
+    q6 = st.selectbox("6. Have you applied any cream before?", ["No", "Yes, Home remedy", "Yes, Medical cream"])
+    q7 = st.selectbox("7. Do you have any allergy?", ["No allergy", "Yes, Dust / Food allergy", "Don't know"])
+
+    st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
+    
     st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
 if st.button("✨ PREDICT NOW"):
      with st.spinner("AI image ko check kar raha hai..."):
