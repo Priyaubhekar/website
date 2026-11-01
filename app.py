@@ -6,9 +6,15 @@ import os
 import gdown
 st.markdown("""
 <style>
-p, label, div { color: black !important; font-size: 18px !important; }
-.streamlit-expanderHeader { color: white !important; background-color: #4A6CF7 !important; }
+.stApp, [data-testid="stAppViewContainer"] { background-color: white !important; }
+p, label, div, span, h1, h2, h3 { color: black !important; }
+.streamlit-expanderHeader { background-color: #4A6CF7 !important; color: white !important; }
 .streamlit-expanderHeader p { color: white !important; }
+div[data-baseweb="select"] > div { background-color: white !important; color: black !important; border: 1px solid #ccc !important; }
+div[data-baseweb="select"] span { color: black !important; }
+[data-testid="stFileUploader"] { background-color: white !important; border: 2px dashed #4A6CF7 !important; border-radius: 10px !important; }
+[data-testid="stFileUploader"] p, [data-testid="stFileUploader"] span, [data-testid="stFileUploader"] div { color: black !important; }
+[data-testid="stFileUploader"] button { background-color: #4A6CF7 !important; color: white !important; }
 </style>
 """, unsafe_allow_html=True)
 FILE_ID = "1Tor1YFYlqWwY5dhZ0BVdWcSpYrN5-cKF"
