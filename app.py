@@ -6,14 +6,23 @@ import os
 import gdown
 st.markdown("""
 <style>
-.stApp, [data-testid="stAppViewContainer"] { background-color: white !important; }
+/* Pura app safed */
+[data-testid="stAppViewContainer"], .stApp { background-color: white !important; }
 p, label, div, span, h1, h2, h3 { color: black !important; }
-.streamlit-expanderHeader { background-color: #4A6CF7 !important; color: white !important; }
-.streamlit-expanderHeader p { color: white !important; }
-div[data-baseweb="select"] > div { background-color: white !important; color: black !important; border: 1px solid #ccc !important; }
-div[data-baseweb="select"] span { color: black !important; }
-[data-testid="stFileUploader"] { background-color: white !important; border: 2px dashed #4A6CF7 !important; border-radius: 10px !important; }
-[data-testid="stFileUploader"] p, [data-testid="stFileUploader"] span, [data-testid="stFileUploader"] div { color: black !important; }
+
+/* Doctor wali patti neeli */
+[data-testid="stExpander"] summary { background-color: #4A6CF7 !important; color: white !important; }
+[data-testid="stExpander"] summary p { color: white !important; }
+
+/* YE WALA HAI ASLI - 4 kaale dabbe safed karne ke liye */
+div[data-baseweb="select"] * { background-color: white !important; color: black !important; border-color: #ccc !important; }
+div[data-baseweb="select"] > div { background-color: white !important; }
+div[data-testid="stSelectbox"] * { background-color: white !important; color: black !important; }
+div[data-baseweb="popover"] *, div[data-baseweb="menu"] *, ul[role="listbox"] * { background-color: white !important; color: black !important; }
+
+/* Upload wala dabba */
+[data-testid="stFileUploader"] { background-color: white !important; border: 2px dashed #4A6CF7 !important; }
+[data-testid="stFileUploader"] * { color: black !important; }
 [data-testid="stFileUploader"] button { background-color: #4A6CF7 !important; color: white !important; }
 </style>
 """, unsafe_allow_html=True)
