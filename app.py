@@ -106,8 +106,7 @@ else:
     camera_photo = st.camera_input("📷 Take Live Photo - Keep your skin in front of camera")
     if camera_photo is not None:
         image = Image.open(camera_photo).convert("RGB")
-
- if image is not None:
+if image is not None:
     st.image(image, caption="Your Uploaded Image", use_container_width=True)
     with st.expander("🩺 Doctor Like Questions", expanded=True):
         q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"], horizontal=True)
