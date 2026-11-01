@@ -4,7 +4,11 @@ import numpy as np
 from PIL import Image
 import os
 import gdown
-
+st.markdown("""
+<style>
+p, label, div, span { color: black !important; font-size: 20px !important; }
+</style>
+""", unsafe_allow_html=True)
 FILE_ID = "1Tor1YFYlqWwY5dhZ0BVdWcSpYrN5-cKF"
 MODEL_PATH = "new_model_9class.keras"
 
@@ -109,12 +113,12 @@ else:
 if image is not None:
     st.image(image, caption="Your Uploaded Image",width=300)
     with st.expander("🩺 Doctor Like Questions", expanded=True):
-        q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"])
-        q2 = st.radio("2. Itching?", ["Yes", "Little", "No"],)
-        q3 = st.radio("3. Pain / Burning?", ["Yes", "No"],)
-        q4 = st.radio("4. Spreading?", ["Yes", "No"],)
-        q5 = st.radio("5. Fever?", ["Yes", "No"],)
-        q6 = st.radio("6. Cream used?", ["No", "Yes"],)
+        q1 = st.selectbox("1. Since when?", ["2 days", "1 week", "1 month+"])
+        q2 = st.selectbox("2. Itching?", ["Yes", "Little", "No"])
+        q3 = st.selectbox("3. Pain / Burning?", ["Yes", "No"])
+        q4 = st.selectbox("4. Spreading?", ["Yes", "No"])
+        q5 = st.selectbox("5. Fever?", ["Yes", "No"])
+        q6 = st.selectbox("6. Cream used?", ["No", "Yes"])
     st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
     st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
     if st.button("✨ PREDICT NOW"):
