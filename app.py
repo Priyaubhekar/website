@@ -107,14 +107,14 @@ else:
     if camera_photo is not None:
         image = Image.open(camera_photo).convert("RGB")
 if image is not None:
-    st.image(image, caption="Your Uploaded Image", use_container_width=True)
+    st.image(image, caption="Your Uploaded Image",width=300)
     with st.expander("🩺 Doctor Like Questions", expanded=True):
-        q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"], horizontal=True)
-        q2 = st.radio("2. Itching?", ["Yes", "Little", "No"], horizontal=True)
-        q3 = st.radio("3. Pain / Burning?", ["Yes", "No"], horizontal=True)
-        q4 = st.radio("4. Spreading?", ["Yes", "No"], horizontal=True)
-        q5 = st.radio("5. Fever?", ["Yes", "No"], horizontal=True)
-        q6 = st.radio("6. Cream used?", ["No", "Yes"], horizontal=True)
+        q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"])
+        q2 = st.radio("2. Itching?", ["Yes", "Little", "No"],)
+        q3 = st.radio("3. Pain / Burning?", ["Yes", "No"],)
+        q4 = st.radio("4. Spreading?", ["Yes", "No"],)
+        q5 = st.radio("5. Fever?", ["Yes", "No"],)
+        q6 = st.radio("6. Cream used?", ["No", "Yes"],)
     st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
     st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
     if st.button("✨ PREDICT NOW"):
