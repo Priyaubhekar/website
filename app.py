@@ -107,11 +107,17 @@ else:
     if camera_photo is not None:
         image = Image.open(camera_photo).convert("RGB")
 
-if image is not None:
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-          # ============ DOCTOR Q&A - COMPACT & CLEAN ============
-    with st.expander("🩺 Doctor Like Questions - Click to Answer", expanded=True):
+    if image is not None:
+        col1, col2, col3 = st.columns([1,2,1])
+        with col2:
+            st.image(image, caption="Your Uploaded Image", use_container_width=True)
+            with st.expander("🩺 Doctor Like Questions", expanded=True):
+                q1 = st.radio("1. Since when?", ["2 days", "1 week", "1 month+"], horizontal=True)
+                q2 = st.radio("2. Itching?", ["Yes", "Little", "No"], horizontal=True)
+                q3 = st.radio("3. Pain / Burning?", ["Yes", "No"], horizontal=True)
+                q4 = st.radio("4. Spreading?", ["Yes", "No"], horizontal=True)
+                q5 = st.radio("5. Fever?", ["Yes", "No"], horizontal=True)
+                q6 = st.radio("6. Cream used?", ["No", "Yes"], horizontal=True)
         col1, col2 = st.columns(2)
 
         with col1:
