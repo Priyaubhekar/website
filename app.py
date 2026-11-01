@@ -6,7 +6,9 @@ import os
 import gdown
 st.markdown("""
 <style>
-p, label, div, span { color: black !important; font-size: 20px !important; }
+p, label, div { color: black !important; font-size: 18px !important; }
+.streamlit-expanderHeader { color: white !important; background-color: #4A6CF7 !important; }
+.streamlit-expanderHeader p { color: white !important; }
 </style>
 """, unsafe_allow_html=True)
 FILE_ID = "1Tor1YFYlqWwY5dhZ0BVdWcSpYrN5-cKF"
