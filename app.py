@@ -119,11 +119,10 @@ else:
 
     # Ye summary nahi dikhayenge, sirf result me use hoga
 
-    st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
-    
-    st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
-if st.button("✨ PREDICT NOW"):
-     with st.spinner("AI image ko check kar raha hai..."):
+      st.info(f"Your Answers: {q1} | Itching: {q2} | Pain: {q3} | Spreading: {q4} | Fever: {q5}")
+      st.markdown("""<h3 style="color:black;">🔍 Step 2: Check Result</h3>""", unsafe_allow_html=True)
+      if st.button("✨ PREDICT NOW"):
+          with st.spinner("AI image ko check kar raha hai..."):
             img = image.resize((224, 224))
             img_array = np.array(img) / 255.0
             img_array = np.expand_dims(img_array, axis=0)
